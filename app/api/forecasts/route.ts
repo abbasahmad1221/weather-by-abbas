@@ -52,8 +52,7 @@ export async function POST(req: NextRequest) {
 
   const validFrom = data.validFrom ? new Date(data.validFrom) : null;
   const validUntil = data.validUntil ? new Date(data.validUntil) : null;
-  if ((data.validFrom && Number.isNaN(validFrom.getTime())) || (data.validUntil && Number.isNaN(validUntil.getTime()))) {
-    return NextResponse.json({ error: "Invalid date value" }, { status: 400 });
+  if ((validFrom && Number.isNaN(validFrom.getTime())) || (validUntil && Number.isNaN(validUntil.getTime()))) {
   }
 
   if (data.categoryId) {
