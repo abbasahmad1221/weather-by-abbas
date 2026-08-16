@@ -1,0 +1,71 @@
+// Prisma schema for Weather by Abbas
+// Production datasource is PostgreSQL. Point DATABASE_URL (in .env) at any
+// Postgres instance — Neon, Supabase, Railway, RDS, or a self-hosted server.
+// For local development without installing Postgres yourself, a free Neon
+// or Supabase project works fine — see README.md for setup steps.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Admin {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  name         String   @default("Admin")
+  createdAt    DateTime @default(now())
+}
+
+model Category {
+  id        String     @id @default(cuid())
+  name      String
+  slug      String     @unique
+  region    String? // e.g. "North Kashmir", "South Kashmir", "Jammu"
+  forecasts Forecast[]
+  createdAt DateTime   @default(now())
+}
+
+model Forecast {
+  id             String    @id @default(cuid())
+  title          String
+  slug           String    @unique
+  summary        String
+  content        String // rich HTML/markdown body
+  advisory       String? // alert / advisory box text
+  severity       String    @default("normal") // normal | watch | warning | alert
+  region         String    @default("Jammu & Kashmir")
+  featuredImage  String? // path to uploaded image
+  metaTitle      String?
+  metaDescription String?
+  published      Boolean   @default(false)
+  isSample       Boolean   @default(false)
+  publishedAt    DateTime?
+  validFrom      DateTime?
+  validUntil     DateTime?
+  author         String    @default("Abbas Nabi")
+  category       Category? @relation(fields: [categoryId], references: [id])
+  categoryId     String?
+  maps           Media[]
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  @@index([published, publishedAt])
+  @@index([slug])
+}
+
+model Media {
+  id         String    @id @default(cuid())
+  fileUrl    String
+  fileType   String // image/png, image/jpeg, etc.
+  caption    String?
+  source     String? // e.g. "IMD", "Meteologix", "GFS Model"
+  capturedAt DateTime?
+  uploadedAt DateTime  @default(now())
+  forecast   Forecast? @relation(fields: [forecastId], references: [id], onDelete: Cascade)
+  forecastId String?
+}
