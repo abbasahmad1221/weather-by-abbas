@@ -34,7 +34,7 @@ export default async function ArchivePage({
     if (searchParams.year && f.publishedAt?.getFullYear().toString() !== searchParams.year) return false;
     if (
       searchParams.month &&
-      (f.publishedAt?.getMonth() + 1).toString() !== searchParams.month
+      (f.publishedAt!.getMonth() + 1).toString() !== searchParams.month
     )
       return false;
     if (searchParams.category && f.category?.slug !== searchParams.category) return false;
