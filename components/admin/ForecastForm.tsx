@@ -92,9 +92,13 @@ export default function ForecastForm({
     setSaving(false);
 
     if (!res.ok) {
-      setError(typeof data.error === "string" ? data.error : "Failed to save forecast");
-      return;
-    }
+  setError(
+    typeof data.error === "string"
+      ? data.error
+      : JSON.stringify(data.error)
+  );
+  return;
+}
 
     router.push("/admin/dashboard");
     router.refresh();
