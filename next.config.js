@@ -16,10 +16,16 @@ if (s3PublicUrl) {
 }
 
 const nextConfig = {
-  images: {
-    remotePatterns,
-    formats: ["image/avif", "image/webp"],
-  },
+ images: {
+  remotePatterns: [
+    ...remotePatterns,
+    {
+      protocol: "https",
+      hostname: "res.cloudinary.com",
+    },
+  ],
+  formats: ["image/avif", "image/webp"],
+},
   eslint: {
     ignoreDuringBuilds: true,
   },
