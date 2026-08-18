@@ -63,9 +63,15 @@ export async function POST(req: NextRequest) {
   try {
     ({ fileUrl } = await saveUpload(buffer, filename, file.type));
   } catch (err) {
-    console.error("Upload storage error:", err);
-    return NextResponse.json({ error: "Failed to store uploaded file" }, { status: 500 });
-  }
+  console.error("Upload storage error:", err);
+
+  return NextResponse.json(
+    {
+      error: err instanceof Error ? err.message : String(err),
+    },
+    { status: 500 }
+  );
+}
 
   if (asMedia) {
     const media = await prisma.media.create({
