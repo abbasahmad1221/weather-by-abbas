@@ -203,11 +203,25 @@ export default function ForecastForm({
           onChange={(e) => e.target.files?.[0] && handleImageUpload(e.target.files[0])}
         />
         {uploading && <p className="text-xs text-slate-500">Uploading…</p>}
-        {form.featuredImage && (
-          <div className="relative mt-2 h-40 w-full max-w-sm overflow-hidden rounded-md border">
-            <Image src={form.featuredImage} alt="Featured" fill className="object-cover" />
-          </div>
-        )}
+       {form.featuredImage && (
+  <div className="relative mt-2 h-40 w-full max-w-sm overflow-hidden rounded-md border">
+    <Image
+      src={form.featuredImage}
+      alt="Featured"
+      fill
+      className="object-cover"
+    />
+
+    <button
+      type="button"
+      onClick={() => update("featuredImage", "")}
+      className="absolute right-2 top-2 z-10 rounded-full bg-black/70 px-2 py-1 text-sm text-white hover:bg-black"
+      aria-label="Remove featured image"
+    >
+      ✕
+    </button>
+  </div>
+)}
       </Field>
 
       <div className="grid gap-4 sm:grid-cols-2">
