@@ -65,14 +65,33 @@ export default function MapsManager({
 
       {initialMaps.length > 0 && (
         <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
-          {initialMaps.map((m) => (
-            <div key={m.id} className="overflow-hidden rounded-md border">
-              <div className="relative aspect-video">
-                <Image src={m.fileUrl} alt={m.caption || "map"} fill className="object-cover" />
-              </div>
-              {m.caption && <div className="p-1 text-[11px] text-slate-600">{m.caption}</div>}
-            </div>
-          ))}
+        {initialMaps.map((m) => (
+  <div key={m.id} className="overflow-hidden rounded-md border">
+    <div className="relative aspect-video">
+      <Image
+        src={m.fileUrl}
+        alt={m.caption || "map"}
+        fill
+        className="object-cover"
+      />
+
+      <button
+        type="button"
+        onClick={() => {
+          // Remove functionality will be connected next
+        }}
+        className="absolute right-2 top-2 z-10 rounded-full bg-black/70 px-2 py-1 text-sm text-white hover:bg-black"
+        aria-label="Remove weather map"
+      >
+        ✕
+      </button>
+    </div>
+
+    {m.caption && (
+      <div className="p-1 text-[11px] text-slate-600">{m.caption}</div>
+    )}
+  </div>
+))}
         </div>
       )}
 
