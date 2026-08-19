@@ -1,4 +1,4 @@
-"use client";
+ "use client";
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -22,20 +22,70 @@ export default function MapsManager({
   const [caption, setCaption] = useState("");
   const [source, setSource] = useState("");
   const [uploading, setUploading] = useState(false);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
 
   async function handleUpload(file: File) {
     setUploading(true);
-    const fd = new FormData();
-    fd.append("file", file);
-    fd.append("asMedia", "true");
-    fd.append("forecastId", forecastId);
-    if (caption) fd.append("caption", caption);
-    if (source) fd.append("source", source);
-    await fetch("/api/upload", { method: "POST", body: fd });
-    setUploading(false);
-    setCaption("");
-    setSource("");
-    router.refresh();
+
+    try {
+      const fd = new FormData();
+      fd.append("file", file);
+      fd.append("asMedia", "true");
+      fd.append("forecastId", forecastId);
+
+      if (caption) fd.append("caption", caption);
+      if (source) fd.append("source", source);
+
+      const response = await fetch("/api/upload", {
+        method: "POST",
+        body: fd,
+      });
+
+      if (!response.ok) {
+        const data = await response.json().catch(() => ({}));
+        alert(data.error || "Upload failed");
+        return;
+      }
+
+      setCaption("");
+      setSource("");
+      router.refresh();
+    } catch (error) {
+      console.error("Upload error:", error);
+      alert("Upload failed");
+    } finally {
+      setUploading(false);
+    }
+  }
+
+  async function handleDelete(id: string) {
+    const confirmed = window.confirm(
+      "Are you sure you want to remove this weather map?"
+    );
+
+    if (!confirmed) return;
+
+    setDeletingId(id);
+
+    try {
+      const response = await fetch(`/api/media/${id}`, {
+        method: "DELETE",
+      });
+
+      const data = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        alert(data.error || "Failed to remove weather map");
+        return;
+      }
+
+      router.refresh();
+    } catch (error) {
+      console.error("Remove map error:", error);
+      alert("Failed to remove weather map");
+    } finally {
+      setDeletingId(null);
+    }
   }
 
   return (
@@ -49,49 +99,70 @@ export default function MapsManager({
           onChange={(e) => setCaption(e.target.value)}
           className="input"
         />
+
         <input
           placeholder="Source (e.g. IMD, GFS)"
           value={source}
           onChange={(e) => setSource(e.target.value)}
           className="input"
         />
+
         <input
           type="file"
           accept="image/*"
-          onChange={(e) => e.target.files?.[0] && handleUpload(e.target.files[0])}
+          disabled={uploading}
+          onChange={(e) => {
+            const file = e.target.files?.[0];
+
+            if (file) {
+              handleUpload(file);
+            }
+
+            e.currentTarget.value = "";
+          }}
         />
       </div>
-      {uploading && <p className="mt-1 text-xs text-slate-500">Uploading…</p>}
+
+      {uploading && (
+        <p className="mt-1 text-xs text-slate-500">
+          Uploading…
+        </p>
+      )}
 
       {initialMaps.length > 0 && (
         <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
-        {initialMaps.map((m) => (
-  <div key={m.id} className="overflow-hidden rounded-md border">
-    <div className="relative aspect-video">
-      <Image
-        src={m.fileUrl}
-        alt={m.caption || "map"}
-        fill
-        className="object-cover"
-      />
+          {initialMaps.map((m) => (
+            <div
+              key={m.id}
+              className="overflow-hidden rounded-md border"
+            >
+              <div className="relative aspect-video">
+                <Image
+                  src={m.fileUrl}
+                  alt={m.caption || "map"}
+                  fill
+                  className="object-cover"
+                />
 
-      <button
-        type="button"
-        onClick={() => {
-          // Remove functionality will be connected next
-        }}
-        className="absolute right-2 top-2 z-10 rounded-full bg-black/70 px-2 py-1 text-sm text-white hover:bg-black"
-        aria-label="Remove weather map"
-      >
-        ✕
-      </button>
-    </div>
+                <button
+                  type="button"
+                  onClick={() => handleDelete(m.id)}
+                  disabled={deletingId === m.id}
+                  className="absolute right-2 top-2 z-10 rounded-full bg-black/70 px-2 py-1 text-sm text-white hover:bg-black disabled:cursor-not-allowed disabled:opacity-50"
+                  aria-label="Remove weather map"
+                  title="Remove weather map"
+                >
+                  {deletingId === m.id ? "…" : "✕"}
+                </button>
+              </div>
 
-    {m.caption && (
-      <div className="p-1 text-[11px] text-slate-600">{m.caption}</div>
-    )}
-  </div>
-))}
+              {m.caption && (
+                <div className="p-1 text-[11px] text-slate-600">
+                  {m.caption}
+                </div>
+              )}
+            </div>
+          ))}
         </div>
       )}
 
