@@ -128,17 +128,25 @@ export default async function ForecastPage({ params }: { params: { slug: string 
       </div>
 
       {forecast.featuredImage && (
-        <div className="relative mt-6 aspect-[16/9] w-full overflow-hidden rounded-xl">
-          <Image
-            src={forecast.featuredImage}
-            alt={forecast.title}
-            fill
-            priority
-            sizes="(max-width: 768px) 100vw, 768px"
-            className="object-cover"
-          />
-        </div>
-      )}
+  <div className="relative mt-6 aspect-[16/9] w-full overflow-hidden rounded-xl">
+    <a
+      href={forecast.featuredImage}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`View ${forecast.title} featured image full size`}
+      className="block h-full w-full"
+    >
+      <Image
+        src={forecast.featuredImage}
+        alt={forecast.title}
+        fill
+        priority
+        sizes="(max-width: 768px) 100vw, 768px"
+        className="object-cover transition duration-300 hover:scale-105"
+      />
+    </a>
+  </div>
+)}
 
       {forecast.advisory && (
         <div className="mt-6 rounded-lg border-l-4 border-amber-500 bg-amber-50 p-4 text-sm text-amber-900">
