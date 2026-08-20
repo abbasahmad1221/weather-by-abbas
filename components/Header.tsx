@@ -6,6 +6,7 @@ const navLinks = [
   { href: "/", label: "Today" },
   { href: "/forecasts", label: "Forecasts" },
   { href: "/archive", label: "Archive" },
+  { href: "/about", label: "About" },
 ];
 
 export default function Header() {
