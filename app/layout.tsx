@@ -6,8 +6,8 @@ import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   verification: {
-    google: "6IJBqnwSxiZEoQ6qyJNexEKAsgpWQXaFEJ5G01QdLgU",
-  },
+  google: "ONqc1c52Urv7F4vRxCP0WjvQOT0RRwjkptvz0WCCpCQ",
+},
   metadataBase: new URL(siteConfig.url),
   title: {
     default: `${siteConfig.name} | Jammu & Kashmir Weather Forecast`,
