@@ -31,6 +31,17 @@ export default function LocationSearch() {
     }
   }
 
+  function selectLocation(location: LocationResult) {
+    setQuery(location.name);
+    setResults([]);
+
+    window.dispatchEvent(
+      new CustomEvent("location-selected", {
+        detail: location,
+      })
+    );
+  }
+
   return (
     <div className="relative z-50 w-full max-w-sm">
       <div className="relative z-[100] flex items-center gap-2 rounded-lg border border-storm-700 bg-storm-900 px-3 py-2">
@@ -50,6 +61,7 @@ export default function LocationSearch() {
         />
 
         <button
+          type="button"
           onClick={handleSearch}
           disabled={loading}
           className="rounded-md bg-amber-500 px-3 py-1.5 text-xs font-semibold text-storm-950 hover:bg-amber-400 disabled:opacity-50"
@@ -62,17 +74,9 @@ export default function LocationSearch() {
         <div className="absolute left-0 right-0 top-full z-50 mt-2 overflow-visible rounded-lg border border-storm-700 bg-storm-900 shadow-xl">
           {results.map((location) => (
             <button
+              type="button"
               key={`${location.latitude}-${location.longitude}`}
-              onClick={() => {
-                setQuery(location.name);
-                setResults([]);
-
-                window.dispatchEvent(
-                  new CustomEvent("location-selected", {
-                    detail: location,
-                  })
-                );
-              }}
+              onClick={() => selectLocation(location)}
               className="block w-full px-4 py-3 text-left hover:bg-storm-800"
             >
               <div className="text-sm font-semibold text-white">
