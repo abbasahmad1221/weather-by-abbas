@@ -5,6 +5,7 @@ import { siteConfig } from "@/lib/site";
 import ForecastCard from "@/components/ForecastCard";
 import SeverityBadge from "@/components/SeverityBadge";
 import { formatDate } from "@/lib/utils";
+import { getWeather } from "@/lib/weather";
 import type { Metadata } from "next";
 
 export const revalidate = 60;
