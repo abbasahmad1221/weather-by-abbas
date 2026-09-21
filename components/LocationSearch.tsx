@@ -9,6 +9,7 @@ export default function LocationSearch() {
   const [loading, setLoading] = useState(false);
 
   async function handleSearch() {
+    console.log("SEARCH CLICKED", query);
     if (query.trim().length < 2) {
       setResults([]);
       return;
