@@ -13,7 +13,7 @@ const navLinks = [
 export default function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-storm-800 bg-storm-950/95 backdrop-blur supports-[backdrop-filter]:bg-storm-950/80">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
+<div className="mx-auto flex max-w-6xl items-center gap-4 px-4 py-3">
         <Link href="/" className="flex items-center gap-3 shrink-0">
           <div className="relative h-11 w-11 overflow-hidden rounded-full ring-2 ring-amber-500">
             <Image src="/logo.jpg" alt={siteConfig.name} fill sizes="44px" className="object-cover" priority />
