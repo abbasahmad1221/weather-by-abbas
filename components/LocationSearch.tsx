@@ -56,7 +56,7 @@ setResults(locations);
       </div>
 
       {results.length > 0 && (
-        <div className="absolute left-0 right-0 top-full z-50 mt-2 overflow-hidden rounded-lg border border-storm-700 bg-storm-900 shadow-xl">
+        <div className="absolute left-0 right-0 top-full z-50 mt-2 overflow-visible rounded-lg border border-storm-700 bg-storm-900 shadow-xl">
           {results.map((location) => (
             <button
               key={`${location.latitude}-${location.longitude}`}
