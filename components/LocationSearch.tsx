@@ -1,4 +1,4 @@
- ```tsx
+
 "use client";
 
 import { useState } from "react";
@@ -23,15 +23,14 @@ export default function LocationSearch() {
     try {
       const locations = await searchLocations(query.trim());
       setResults(locations);
-    } catch (error) {
-      console.error("Location search failed:", error);
+    } catch {
       setResults([]);
     } finally {
       setLoading(false);
     }
   }
 
-  function selectLocation(location: LocationResult) {
+  function handleSelect(location: LocationResult) {
     setQuery(location.name);
     setResults([]);
 
@@ -44,15 +43,15 @@ export default function LocationSearch() {
 
   return (
     <div className="relative z-50 w-full max-w-sm">
-      <div className="relative z-[100] flex items-center gap-2 rounded-lg border border-storm-700 bg-storm-900 px-3 py-2">
+      <div className="flex items-center gap-2 rounded-lg border border-storm-700 bg-storm-900 px-3 py-2">
         <span className="text-lg">🔎</span>
 
         <input
           type="text"
           value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
+          onChange={(event) => setQuery(event.target.value)}
+          onKeyDown={(event) => {
+            if (event.key === "Enter") {
               handleSearch();
             }
           }}
@@ -64,30 +63,36 @@ export default function LocationSearch() {
           type="button"
           onClick={handleSearch}
           disabled={loading}
-          className="rounded-md bg-amber-500 px-3 py-1.5 text-xs font-semibold text-storm-950 hover:bg-amber-400 disabled:opacity-50"
+          className="rounded-md bg-amber-500 px-3 py-1.5 text-xs font-semibold text-storm-950"
         >
           {loading ? "..." : "Search"}
         </button>
       </div>
 
       {results.length > 0 && (
-        <div className="absolute left-0 right-0 top-full z-50 mt-2 overflow-visible rounded-lg border border-storm-700 bg-storm-900 shadow-xl">
+        <div className="absolute left-0 right-0 top-full z-50 mt-2 rounded-lg border border-storm-700 bg-storm-900 shadow-xl">
           {results.map((location) => (
-            <button
-              type="button"
+            <div
               key={`${location.latitude}-${location.longitude}`}
-              onClick={() => selectLocation(location)}
-              className="block w-full px-4 py-3 text-left hover:bg-storm-800"
+              className="border-b border-storm-700 last:border-b-0"
             >
-              <div className="text-sm font-semibold text-white">
-                {location.name}
-              </div>
+              <button
+                type="button"
+                onClick={() => handleSelect(location)}
+                className="w-full px-4 py-3 text-left hover:bg-storm-800"
+              >
+                <div className="text-sm font-semibold text-white">
+                  {location.name}
+                </div>
 
-              <div className="text-xs text-slate-400">
-                {location.admin1 ? `${location.admin1}, ` : ""}
-                {location.country}
-              </div>
-            </button>
+                <div className="text-xs text-slate-400">
+                  {location.admin1
+                    ? `${location.admin1}, `
+                    : ""}
+                  {location.country}
+                </div>
+              </button>
+            </div>
           ))}
         </div>
       )}
