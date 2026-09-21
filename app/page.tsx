@@ -17,12 +17,14 @@ export const metadata: Metadata = {
 };
 
 export default async function HomePage() {
+  const weather = await getWeather(34.0837, 74.7973);
+
   const latest = await prisma.forecast.findFirst({
     where: { published: true },
     orderBy: { publishedAt: "desc" },
     include: { category: true },
   });
-
+  
   const recent = await prisma.forecast.findMany({
     where: { published: true, NOT: latest ? { id: latest.id } : undefined },
     orderBy: { publishedAt: "desc" },
