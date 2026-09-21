@@ -27,7 +27,7 @@ export default function LocationSearch() {
   }
 
   return (
-    <div className="relative w-full max-w-sm">
+    <div className="relative z-50 w-full max-w-sm">
       <div className="flex items-center gap-2 rounded-lg border border-storm-700 bg-storm-900 px-3 py-2">
         <span className="text-lg">🔎</span>
 
