@@ -1,62 +1,40 @@
-import { getWeather } from "@/lib/weather";
+ import LiveWeather from "@/components/LiveWeather";
+import LocationSearch from "@/components/LocationSearch";
+import type { Metadata } from "next";
 
-export const revalidate = 600;
+export const metadata: Metadata = {
+  title: "Live Weather | Jammu & Kashmir Weather",
+  description:
+    "Check live weather conditions, temperature, humidity, wind and precipitation across Jammu & Kashmir.",
+  alternates: {
+    canonical: "/weather",
+  },
+};
 
-export default async function WeatherPage() {
-  const weather = await getWeather(34.0837, 74.7973);
-
+export default function WeatherPage() {
   return (
-    <main className="mx-auto max-w-6xl px-4 py-10">
-      <div className="mb-8">
-        <p className="text-sm font-semibold uppercase tracking-wide text-sky-600">
-          🌦️ Live Weather
-        </p>
+    <main className="min-h-screen bg-slate-50">
+      <section className="bg-storm-gradient">
+        <div className="mx-auto max-w-6xl px-4 py-12 text-center sm:py-16">
+          <h1 className="font-display text-3xl font-extrabold text-white sm:text-4xl">
+            🌦️ Live Weather
+          </h1>
 
-        <h1 className="mt-1 font-display text-3xl font-extrabold text-storm-900">
-          Srinagar, Jammu & Kashmir
-        </h1>
-
-        <p className="mt-2 text-sm text-slate-500">
-          Current weather conditions · Updated automatically
-        </p>
-      </div>
-
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-        <div className="rounded-2xl border border-sky-200 bg-sky-50 p-5">
-          <p className="text-sm text-slate-500">Temperature</p>
-          <p className="mt-2 text-3xl font-bold text-slate-900">
-            {weather.temperature}°C
+          <p className="mx-auto mt-3 max-w-2xl text-slate-300">
+            Know the current weather in your hometown and across Jammu & Kashmir.
           </p>
-        </div>
 
-        <div className="rounded-2xl border border-slate-200 bg-white p-5">
-          <p className="text-sm text-slate-500">Feels Like</p>
-          <p className="mt-2 text-3xl font-bold text-slate-900">
-            {weather.feelsLike}°C
-          </p>
+          <div className="mx-auto mt-7 max-w-sm">
+            <LocationSearch />
+          </div>
         </div>
+      </section>
 
-        <div className="rounded-2xl border border-slate-200 bg-white p-5">
-          <p className="text-sm text-slate-500">Humidity</p>
-          <p className="mt-2 text-3xl font-bold text-slate-900">
-            {weather.humidity}%
-          </p>
-        </div>
-
-        <div className="rounded-2xl border border-slate-200 bg-white p-5">
-          <p className="text-sm text-slate-500">Precipitation</p>
-          <p className="mt-2 text-3xl font-bold text-slate-900">
-            {weather.precipitation} mm
-          </p>
-        </div>
-
-        <div className="rounded-2xl border border-slate-200 bg-white p-5">
-          <p className="text-sm text-slate-500">Wind Speed</p>
-          <p className="mt-2 text-3xl font-bold text-slate-900">
-            {weather.windSpeed} km/h
-          </p>
-        </div>
-      </div>
+      <LiveWeather
+        latitude={34.0837}
+        longitude={74.7973}
+        locationName="Srinagar, Jammu & Kashmir"
+      />
     </main>
   );
 }
