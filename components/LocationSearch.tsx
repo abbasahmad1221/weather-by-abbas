@@ -19,8 +19,9 @@ export default function LocationSearch() {
     try {
       const locations = await searchLocations(query.trim());
       setResults(locations);
-    } catch {
-      setResults([]);
+   } catch (error) {
+  console.error("Location search failed:", error);
+  setResults([]);
     } finally {
       setLoading(false);
     }
