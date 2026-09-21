@@ -43,7 +43,6 @@ const customEvent = event as CustomEvent<LocationData>;
 setCurrentLocation(customEvent.detail);
 }
 
-```
 window.addEventListener(
   "location-selected",
   handleLocationSelected
@@ -55,15 +54,12 @@ return () => {
     handleLocationSelected
   );
 };
-```
 
 }, []);
 
 useEffect(() => {
 async function loadWeather() {
 setLoading(true);
-
-```
   try {
     const url = new URL(
       "https://api.open-meteo.com/v1/forecast"
@@ -109,7 +105,6 @@ setLoading(true);
 }
 
 loadWeather();
-```
 
 }, [
 currentLocation.latitude,
@@ -118,8 +113,6 @@ currentLocation.longitude,
 
 return ( <section className="mx-auto max-w-6xl px-4 py-8"> <div className="rounded-2xl border border-sky-200 bg-white p-6 shadow-sm"> <div className="mb-5"> <p className="text-sm font-semibold uppercase tracking-wide text-sky-600">
 Live Weather </p>
-
-```
       <h2 className="font-display text-2xl font-bold text-storm-900">
         {currentLocation.name}
       </h2>
@@ -192,7 +185,6 @@ Live Weather </p>
     )}
   </div>
 </section>
-```
 
 );
 }
