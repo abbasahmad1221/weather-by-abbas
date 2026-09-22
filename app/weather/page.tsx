@@ -1,5 +1,5 @@
  import LiveWeather from "@/components/LiveWeather";
-import LocationSearch from "@/components/LocationSearch";
+import WeatherLocationControls from "@/components/WeatherLocationControls";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -21,12 +21,10 @@ export default function WeatherPage() {
           </h1>
 
           <p className="mx-auto mt-3 max-w-2xl text-slate-300">
-            Know the current weather in your hometown and across Jammu & Kashmir.
+            Know the weather in your hometown
           </p>
 
-          <div className="mx-auto mt-7 max-w-sm">
-            <LocationSearch />
-          </div>
+          <WeatherLocationControls />
         </div>
       </section>
 
