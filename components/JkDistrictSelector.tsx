@@ -1,4 +1,6 @@
-"use client";
+ "use client";
+
+import { useState } from "react";
 
 const districts = [
   { name: "Jammu", latitude: 32.7266, longitude: 74.857 },
@@ -23,7 +25,17 @@ const districts = [
   { name: "Anantnag", latitude: 33.7311, longitude: 75.1487 },
 ];
 
+const defaultDistrictNames = ["Srinagar", "Kupwara", "Bandipora", "Jammu"];
+
 export default function JkDistrictSelector() {
+  const [showAll, setShowAll] = useState(false);
+
+  const defaultDistricts = defaultDistrictNames
+    .map((name) => districts.find((district) => district.name === name))
+    .filter(Boolean) as (typeof districts)[number][];
+
+  const visibleDistricts = showAll ? districts : defaultDistricts;
+
   const handleSelect = (district: (typeof districts)[number]) => {
     window.dispatchEvent(
       new CustomEvent("location-selected", {
@@ -44,7 +56,7 @@ export default function JkDistrictSelector() {
       </p>
 
       <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
-        {districts.map((district) => (
+        {visibleDistricts.map((district) => (
           <button
             key={district.name}
             type="button"
@@ -55,6 +67,14 @@ export default function JkDistrictSelector() {
           </button>
         ))}
       </div>
+
+      <button
+        type="button"
+        onClick={() => setShowAll((value) => !value)}
+        className="mt-3 rounded-xl border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold text-slate-200 backdrop-blur transition hover:bg-amber-500 hover:text-storm-950"
+      >
+        {showAll ? "⌃ Hide districts" : "⌄ Show all districts"}
+      </button>
     </div>
   );
 }
