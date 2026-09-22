@@ -1,4 +1,5 @@
- import LiveWeather from "@/components/LiveWeather";
+import RainViewerRadar from "@/components/RainViewerRadar";
+import LiveWeather from "@/components/LiveWeather";
 import WeatherLocationControls from "@/components/WeatherLocationControls";
 import JkDistrictSelector from "@/components/JkDistrictSelector";
 import type { Metadata } from "next";
@@ -36,6 +37,7 @@ export default function WeatherPage() {
         longitude={74.7973}
         locationName="Srinagar, Jammu & Kashmir"
       />
+     <RainViewerRadar />
     </main>
   );
 }
