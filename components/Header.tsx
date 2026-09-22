@@ -1,7 +1,6 @@
  import Link from "next/link";
 import Image from "next/image";
 import { siteConfig } from "@/lib/site";
-import LocationSearch from "@/components/LocationSearch";
 
 const navLinks = [
   { href: "/weather", label: "🌦️ Live Weather" },
@@ -28,8 +27,6 @@ export default function Header() {
             </div>
           </div>
         </Link>
-
-        <LocationSearch />
 
         <nav className="hidden items-center gap-6 sm:flex">
           {navLinks.map((l) => (
