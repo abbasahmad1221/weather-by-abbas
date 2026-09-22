@@ -1,5 +1,6 @@
  import LiveWeather from "@/components/LiveWeather";
 import WeatherLocationControls from "@/components/WeatherLocationControls";
+import JkDistrictSelector from "@/components/JkDistrictSelector";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -25,6 +26,8 @@ export default function WeatherPage() {
           </p>
 
           <WeatherLocationControls />
+
+          <JkDistrictSelector />
         </div>
       </section>
 
