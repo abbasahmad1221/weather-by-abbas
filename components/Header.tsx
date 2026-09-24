@@ -1,5 +1,8 @@
- import Link from "next/link";
+ "use client";
+
+import Link from "next/link";
 import Image from "next/image";
+import { useState } from "react";
 import { siteConfig } from "@/lib/site";
 
 const navLinks = [
@@ -44,11 +47,14 @@ function WeatherIcon() {
 }
 
 export default function Header() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
     <header className="sticky top-0 z-40 border-b border-storm-800 bg-storm-950/95 backdrop-blur supports-[backdrop-filter]:bg-storm-950/80">
       <div className="mx-auto flex min-h-[68px] max-w-7xl items-center justify-between gap-3 px-3 sm:px-5 lg:px-8">
         <Link
           href="/"
+          onClick={() => setMenuOpen(false)}
           className="flex min-w-0 shrink items-center gap-2.5 sm:gap-3"
         >
           <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-xl border border-white/10 bg-white/5 shadow-lg ring-1 ring-amber-500/50 sm:h-11 sm:w-11">
@@ -87,9 +93,16 @@ export default function Header() {
           ))}
         </nav>
 
-        <details className="relative shrink-0 md:hidden">
-          <summary className="flex cursor-pointer list-none items-center gap-2 rounded-lg border border-storm-700 bg-storm-900/70 px-3 py-2 text-sm font-semibold text-slate-200 transition hover:border-amber-500/50 hover:text-amber-400">
+        <div className="relative shrink-0 md:hidden">
+          <button
+            type="button"
+            onClick={() => setMenuOpen((open) => !open)}
+            aria-expanded={menuOpen}
+            aria-label="Toggle navigation menu"
+            className="flex items-center gap-2 rounded-lg border border-storm-700 bg-storm-900/70 px-3 py-2 text-sm font-semibold text-slate-200 transition hover:border-amber-500/50 hover:text-amber-400"
+          >
             <span>Menu</span>
+
             <svg
               className="h-4 w-4"
               viewBox="0 0 24 24"
@@ -104,21 +117,24 @@ export default function Header() {
                 strokeLinecap="round"
               />
             </svg>
-          </summary>
+          </button>
 
-          <div className="absolute right-0 z-50 mt-2 w-56 overflow-hidden rounded-xl border border-storm-700 bg-storm-900 p-2 shadow-2xl">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="flex items-center gap-2 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-200 transition hover:bg-storm-800 hover:text-amber-400"
-              >
-                {link.href === "/weather" && <WeatherIcon />}
-                {link.label}
-              </Link>
-            ))}
-          </div>
-        </details>
+          {menuOpen && (
+            <div className="absolute right-0 z-50 mt-2 w-56 overflow-hidden rounded-xl border border-storm-700 bg-storm-900 p-2 shadow-2xl">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMenuOpen(false)}
+                  className="flex items-center gap-2 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-200 transition hover:bg-storm-800 hover:text-amber-400"
+                >
+                  {link.href === "/weather" && <WeatherIcon />}
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </header>
   );
