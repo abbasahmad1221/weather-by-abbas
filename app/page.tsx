@@ -10,7 +10,8 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Kashmir Weather Today | Jammu & Kashmir Weather Forecast",
-  description: siteConfig.description,
+  description:
+    "Kashmir weather today, Jammu & Kashmir weather forecast, live weather conditions, snowfall, rain and Western Disturbance updates from Weather By Abbas.",
   alternates: {
     canonical: "/",
   },
@@ -82,7 +83,8 @@ export default async function HomePage() {
               Latest Weather Update
             </h2>
             <p className="mt-2 text-sm text-slate-500">
-              The most recently published weather forecast from Weather By Abbas.
+              The most recently published weather forecast from Weather By
+              Abbas.
             </p>
           </div>
 
@@ -186,11 +188,11 @@ export default async function HomePage() {
           </div>
 
           <div className="mt-6">
-          <LiveWeather
-  latitude={34.0837}
-  longitude={74.7973}
-  locationName="Srinagar, Jammu & Kashmir"
-/>
+            <LiveWeather
+              latitude={34.0837}
+              longitude={74.7973}
+              locationName="Srinagar, Jammu & Kashmir"
+            />
           </div>
         </div>
       </section>
@@ -240,6 +242,57 @@ export default async function HomePage() {
             No recent forecasts available.
           </div>
         )}
+      </section>
+
+      <section className="border-y border-slate-200 bg-white">
+        <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-sky-600">
+              Jammu & Kashmir Weather
+            </p>
+
+            <h2 className="mt-3 font-display text-2xl font-bold text-storm-900 sm:text-3xl">
+              Jammu & Kashmir Weather Forecast
+            </h2>
+
+            <p className="mx-auto mt-4 max-w-3xl text-sm leading-7 text-slate-600 sm:text-base">
+              Weather By Abbas provides weather forecasts, current conditions,
+              weather alerts and regional weather updates across Jammu &
+              Kashmir. Coverage includes Jammu, Kashmir Valley, North Kashmir,
+              Central Kashmir, South Kashmir and the Pir Panjal region.
+            </p>
+
+            <p className="mx-auto mt-4 max-w-3xl text-sm leading-7 text-slate-600 sm:text-base">
+              Follow updates on rain, snowfall, temperature changes,
+              thunderstorms and Western Disturbance activity affecting Jammu &
+              Kashmir. Forecast analysis may also include guidance from major
+              weather models to help understand upcoming weather patterns.
+            </p>
+
+            <div className="mt-7 flex flex-wrap justify-center gap-3">
+              <Link
+                href="/weather"
+                className="rounded-lg bg-storm-900 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-storm-800"
+              >
+                Live Weather
+              </Link>
+
+              <Link
+                href="/forecasts"
+                className="rounded-lg border border-slate-200 bg-white px-5 py-2.5 text-sm font-semibold text-storm-900 transition hover:bg-slate-50"
+              >
+                Weather Forecasts
+              </Link>
+
+              <Link
+                href="/archive"
+                className="rounded-lg border border-slate-200 bg-white px-5 py-2.5 text-sm font-semibold text-storm-900 transition hover:bg-slate-50"
+              >
+                Weather Archive
+              </Link>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section className="bg-storm-950">
