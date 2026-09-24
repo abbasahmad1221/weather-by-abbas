@@ -23,7 +23,7 @@ export default function ForecastCard({
   priority?: boolean;
 }) {
   return (
-    <div className="group flex flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
+    <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:border-amber-300 hover:shadow-xl">
       <div className="relative aspect-[16/9] w-full overflow-hidden bg-storm-900">
         {forecast.featuredImage ? (
           <a
@@ -38,52 +38,66 @@ export default function ForecastCard({
               alt={forecast.title}
               fill
               priority={priority}
-              sizes="(max-width: 768px) 100vw, 400px"
-              className="object-cover transition duration-300 group-hover:scale-105"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
+              className="object-cover transition duration-500 group-hover:scale-105"
             />
           </a>
         ) : (
-          <div className="flex h-full items-center justify-center text-slate-500 text-sm">
+          <div className="flex h-full items-center justify-center bg-storm-gradient text-sm text-slate-400">
             No image
           </div>
         )}
 
+        <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-slate-950/80 to-transparent" />
+
         {forecast.isSample && (
-          <span className="absolute left-2 top-2 rounded bg-slate-900/80 px-2 py-0.5 text-[10px] font-semibold uppercase text-white">
+          <span className="absolute left-3 top-3 rounded-full border border-white/10 bg-slate-950/80 px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-white backdrop-blur">
             Sample
+          </span>
+        )}
+
+        {forecast.category && (
+          <span className="absolute bottom-3 left-3 rounded-full border border-white/10 bg-slate-950/75 px-3 py-1 text-[10px] font-semibold text-slate-200 backdrop-blur">
+            {forecast.category.name}
           </span>
         )}
       </div>
 
       <Link
         href={`/forecast/${forecast.slug}`}
-        className="flex flex-1 flex-col gap-2 p-4"
+        className="flex flex-1 flex-col p-5"
       >
         <div className="flex flex-wrap items-center gap-2">
           <SeverityBadge severity={forecast.severity} />
-
-          {forecast.category && (
-            <span className="text-xs font-medium text-slate-500">
-              {forecast.category.name}
-            </span>
-          )}
         </div>
 
-        <h3 className="font-display text-lg font-bold leading-snug text-storm-900 group-hover:text-amber-600">
+        <h3 className="mt-3 font-display text-lg font-bold leading-snug text-slate-900 transition-colors group-hover:text-amber-600">
           {forecast.title}
         </h3>
 
-        <p className="line-clamp-2 text-sm text-slate-600">
+        <p className="mt-3 line-clamp-3 text-sm leading-6 text-slate-600">
           {forecast.summary}
         </p>
 
-        <div className="mt-auto pt-2 text-xs text-slate-400">
-          {forecast.publishedAt
-            ? formatDate(forecast.publishedAt)
-            : "Draft"}{" "}
-          · {forecast.region}
+        <div className="mt-auto border-t border-slate-100 pt-4 mt-5">
+          <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
+            <span className="font-medium text-slate-400">
+              {forecast.publishedAt
+                ? formatDate(forecast.publishedAt)
+                : "Draft"}
+            </span>
+
+            <span className="font-semibold text-slate-500">
+              {forecast.region}
+            </span>
+          </div>
+
+          <div className="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-amber-600 transition group-hover:gap-2.5">
+            Read forecast
+            <span aria-hidden="true">→</span>
+          </div>
         </div>
       </Link>
-    </div>
+    </article>
   );
 }
