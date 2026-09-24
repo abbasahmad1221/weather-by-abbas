@@ -2,6 +2,7 @@ export const siteConfig = {
   name: "Weather by Abbas",
   shortName: "Weather by Abbas",
   handle: "@Kashmir_Storms",
+  instagram: "https://www.instagram.com/kashmir_storms/",
   description:
     "Independent weather forecasts, storm tracking and rain alerts for Jammu & Kashmir — daily Kashmir weather updates, IMD bulletin analysis, and regional forecasts for North and South Kashmir.",
   url: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
