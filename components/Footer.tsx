@@ -35,7 +35,7 @@ export default function Footer() {
   href={siteConfig.instagram}
   target="_blank"
   rel="noopener noreferrer"
-  className="mt-2 inline-block text-sm hover:text-amber-400 hover:underline"
+ className="mt-2 inline-block text-sm font-semibold text-amber-400 hover:text-amber-300 hover:underline"
 >
   {siteConfig.handle}
 </a>
