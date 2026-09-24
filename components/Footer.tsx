@@ -27,7 +27,7 @@ export default function Footer() {
           </div>
           <div>
             <div className="text-sm font-semibold uppercase tracking-wide text-slate-300">
-              Follow on Instagram 
+              Follow on Instagram <br>
               WEATHER BY ABBAS 
             </div>
            <a
