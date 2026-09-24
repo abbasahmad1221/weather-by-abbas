@@ -1,4 +1,4 @@
-import LiveWeather from "@/components/LiveWeather";
+ import LiveWeather from "@/components/LiveWeather";
 import Link from "next/link";
 import Image from "next/image";
 import { prisma } from "@/lib/prisma";
@@ -37,6 +37,7 @@ export default async function HomePage() {
     <div className="min-h-screen bg-slate-50">
       <section className="relative overflow-hidden bg-storm-gradient">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(245,158,11,0.16),transparent_35%)]" />
+
         <div className="relative mx-auto max-w-7xl px-4 pb-12 pt-8 sm:px-6 sm:pb-16 sm:pt-12 lg:px-8">
           <div className="mb-8 flex items-center gap-4">
             <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-2xl border border-white/20 bg-white/10 shadow-lg sm:h-16 sm:w-16">
@@ -54,11 +55,14 @@ export default async function HomePage() {
               <p className="mb-1 text-xs font-semibold uppercase tracking-[0.2em] text-amber-400">
                 Weather By Abbas
               </p>
+
               <h1 className="font-display text-2xl font-extrabold tracking-tight text-white sm:text-4xl">
                 Kashmir Weather Today
               </h1>
+
               <p className="mt-1 max-w-2xl text-sm text-slate-300 sm:text-base">
-                Latest Jammu &amp; Kashmir weather forecasts, alerts and weather analysis.
+                Latest Jammu &amp; Kashmir weather forecasts, alerts and weather
+                analysis.
               </p>
             </div>
           </div>
@@ -97,6 +101,7 @@ export default async function HomePage() {
                 <div className="flex flex-col justify-center p-6 sm:p-8 lg:p-10">
                   <div className="mb-4 flex flex-wrap items-center gap-2">
                     <SeverityBadge severity={latest.severity} />
+
                     {latest.category && (
                       <span className="rounded-full border border-amber-400/20 bg-amber-400/10 px-3 py-1 text-xs font-semibold text-amber-300">
                         {latest.category.name}
@@ -124,7 +129,9 @@ export default async function HomePage() {
 
                   <div className="mt-7 inline-flex w-fit items-center gap-2 rounded-full bg-amber-500 px-5 py-2.5 text-sm font-bold text-slate-950 transition group-hover:bg-amber-400">
                     Read full forecast
-                    <span className="transition-transform group-hover:translate-x-1">→</span>
+                    <span className="transition-transform group-hover:translate-x-1">
+                      →
+                    </span>
                   </div>
                 </div>
               </div>
@@ -145,6 +152,7 @@ export default async function HomePage() {
                 <p className="text-xs font-bold uppercase tracking-[0.18em] text-amber-600">
                   Live Conditions
                 </p>
+
                 <h2 className="mt-1 font-display text-xl font-bold text-slate-900 sm:text-2xl">
                   Kashmir Weather Now
                 </h2>
@@ -174,11 +182,14 @@ export default async function HomePage() {
               <p className="text-xs font-bold uppercase tracking-[0.18em] text-amber-600">
                 Weather Updates
               </p>
+
               <h2 className="mt-1 font-display text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
                 Recent Forecasts
               </h2>
+
               <p className="mt-2 max-w-2xl text-sm text-slate-500">
-                Latest weather analysis, outlooks and updates for Jammu &amp; Kashmir.
+                Latest weather analysis, outlooks and updates for Jammu &amp;
+                Kashmir.
               </p>
             </div>
 
@@ -207,13 +218,96 @@ export default async function HomePage() {
         </section>
       )}
 
-      <section className="border-t border-slate-200 bg-white">
+      <section className="border-y border-slate-200 bg-white">
+        <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6 sm:py-14 lg:px-8">
+          <div className="max-w-3xl">
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-amber-600">
+              Jammu &amp; Kashmir Weather
+            </p>
+
+            <h2 className="mt-2 font-display text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
+              Kashmir Weather Forecast and Updates
+            </h2>
+
+            <div className="mt-5 space-y-4 text-sm leading-7 text-slate-600 sm:text-base">
+              <p>
+                Weather By Abbas provides weather forecasts, live weather
+                conditions, alerts and weather analysis with a special focus on
+                Jammu &amp; Kashmir. The platform covers weather developments
+                across the Kashmir Valley, Jammu region, Pir Panjal and other
+                parts of the region.
+              </p>
+
+              <p>
+                Weather updates may include rainfall, thunderstorms,
+                temperature changes, snowfall, changing atmospheric conditions
+                and significant weather systems affecting Jammu &amp; Kashmir.
+                Forecast information is presented in a simple format to make
+                developing weather conditions easier to understand.
+              </p>
+
+              <p>
+                For current conditions, visit the{" "}
+                <Link
+                  href="/weather"
+                  className="font-semibold text-amber-600 hover:text-amber-700 hover:underline"
+                >
+                  Jammu &amp; Kashmir live weather
+                </Link>{" "}
+                page. To read the latest outlooks and weather analysis, browse
+                the{" "}
+                <Link
+                  href="/forecasts"
+                  className="font-semibold text-amber-600 hover:text-amber-700 hover:underline"
+                >
+                  latest Kashmir weather forecasts
+                </Link>
+                . Previous forecasts can be explored through the{" "}
+                <Link
+                  href="/archive"
+                  className="font-semibold text-amber-600 hover:text-amber-700 hover:underline"
+                >
+                  weather forecast archive
+                </Link>
+                .
+              </p>
+            </div>
+
+            <div className="mt-7 flex flex-wrap gap-3">
+              <Link
+                href="/weather"
+                className="rounded-full bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-800"
+              >
+                Live Weather →
+              </Link>
+
+              <Link
+                href="/forecasts"
+                className="rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 transition hover:border-amber-400 hover:text-amber-600"
+              >
+                Latest Forecasts →
+              </Link>
+
+              <Link
+                href="/archive"
+                className="rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 transition hover:border-amber-400 hover:text-amber-600"
+              >
+                Forecast Archive →
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-slate-200 bg-slate-50">
         <div className="mx-auto max-w-7xl px-4 py-8 text-center sm:px-6 lg:px-8">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-600">
             WEATHER BY ABBAS
           </p>
+
           <p className="mx-auto mt-2 max-w-2xl text-sm leading-6 text-slate-500">
-            Independent meteorological forecasts and weather analysis for Jammu &amp; Kashmir.
+            Independent meteorological forecasts and weather analysis for
+            Jammu &amp; Kashmir.
           </p>
         </div>
       </section>
