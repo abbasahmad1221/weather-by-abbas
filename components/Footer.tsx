@@ -27,9 +27,17 @@ export default function Footer() {
           </div>
           <div>
             <div className="text-sm font-semibold uppercase tracking-wide text-slate-300">
-              Follow
+              Follow on Instagram 
+              WEATHER BY ABBAS 
             </div>
-            <p className="mt-2 text-sm">{siteConfig.handle}</p>
+           <a
+  href={siteConfig.instagram}
+  target="_blank"
+  rel="noopener noreferrer"
+  className="mt-2 inline-block text-sm hover:text-amber-400 hover:underline"
+>
+  {siteConfig.handle}
+</a>
           </div>
         </div>
         <div className="mt-8 border-t border-storm-800 pt-6 text-xs text-slate-500">
