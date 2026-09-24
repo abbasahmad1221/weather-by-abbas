@@ -223,7 +223,6 @@ export default async function HomePage() {
               <ForecastCard
                 key={forecast.id}
                 forecast={{
-                  id: forecast.id,
                   title: forecast.title,
                   slug: forecast.slug,
                   summary: forecast.summary,
