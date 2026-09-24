@@ -1,4 +1,4 @@
-import Link from "next/link";
+ import Link from "next/link";
 import { siteConfig } from "@/lib/site";
 
 export default function Footer() {
@@ -50,16 +50,45 @@ export default function Footer() {
 
           <div>
             <div className="text-sm font-semibold uppercase tracking-wide text-slate-300">
-              Follow on Instagram
-              <br />
-              WEATHER BY ABBAS
+              <span className="inline-flex items-center gap-2">
+                <svg
+                  className="h-4 w-4 text-pink-400"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                >
+                  <rect
+                    x="3"
+                    y="3"
+                    width="18"
+                    height="18"
+                    rx="5"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  />
+                  <circle
+                    cx="12"
+                    cy="12"
+                    r="4"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  />
+                  <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" />
+                </svg>
+                Instagram
+              </span>
             </div>
+
+            <p className="mt-2 text-sm font-medium text-slate-300">
+              Weather By Abbas
+            </p>
 
             <a
               href={siteConfig.instagram}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-2 inline-block text-sm font-semibold text-amber-400 hover:text-amber-300 hover:underline"
+              className="mt-1 inline-block text-sm font-semibold text-amber-400 hover:text-amber-300 hover:underline"
             >
               {siteConfig.handle}
             </a>
