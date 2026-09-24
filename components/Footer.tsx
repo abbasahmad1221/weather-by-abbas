@@ -15,32 +15,57 @@ export default function Footer() {
               Jammu &amp; Kashmir.
             </p>
           </div>
+
           <div>
             <div className="text-sm font-semibold uppercase tracking-wide text-slate-300">
               Explore
             </div>
             <ul className="mt-2 space-y-1 text-sm">
-              <li><Link href="/" className="hover:text-amber-400">Today&apos;s Forecast</Link></li>
-              <li><Link href="/forecasts" className="hover:text-amber-400">All Forecasts</Link></li>
-              <li><Link href="/archive" className="hover:text-amber-400">Archive</Link></li>
+              <li>
+                <Link
+                  href="/"
+                  className="text-sky-400 hover:text-sky-300 hover:underline"
+                >
+                  Today&apos;s Forecast
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/forecasts"
+                  className="text-sky-400 hover:text-sky-300 hover:underline"
+                >
+                  All Forecasts
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/archive"
+                  className="text-sky-400 hover:text-sky-300 hover:underline"
+                >
+                  Archive
+                </Link>
+              </li>
             </ul>
           </div>
+
           <div>
-         <div className="text-sm font-semibold uppercase tracking-wide text-slate-300">
-  Follow on Instagram
-  <br />
-  WEATHER BY ABBAS
-</div>
-           <a
-  href={siteConfig.instagram}
-  target="_blank"
-  rel="noopener noreferrer"
- className="mt-2 inline-block text-sm font-semibold text-amber-400 hover:text-amber-300 hover:underline"
->
-  {siteConfig.handle}
-</a>
+            <div className="text-sm font-semibold uppercase tracking-wide text-slate-300">
+              Follow on Instagram
+              <br />
+              WEATHER BY ABBAS
+            </div>
+
+            <a
+              href={siteConfig.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-2 inline-block text-sm font-semibold text-amber-400 hover:text-amber-300 hover:underline"
+            >
+              {siteConfig.handle}
+            </a>
           </div>
         </div>
+
         <div className="mt-8 border-t border-storm-800 pt-6 text-xs text-slate-500">
           © {new Date().getFullYear()} {siteConfig.name}. All forecasts are
           independent analysis and should be used alongside official IMD
