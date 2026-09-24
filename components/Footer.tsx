@@ -26,10 +26,11 @@ export default function Footer() {
             </ul>
           </div>
           <div>
-            <div className="text-sm font-semibold uppercase tracking-wide text-slate-300">
-              Follow on Instagram <br>
-              WEATHER BY ABBAS 
-            </div>
+         <div className="text-sm font-semibold uppercase tracking-wide text-slate-300">
+  Follow on Instagram
+  <br />
+  WEATHER BY ABBAS
+</div>
            <a
   href={siteConfig.instagram}
   target="_blank"
