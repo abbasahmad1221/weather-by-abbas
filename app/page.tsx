@@ -186,7 +186,11 @@ export default async function HomePage() {
           </div>
 
           <div className="mt-6">
-            <LiveWeather city="Srinagar" />
+          <LiveWeather
+  latitude={34.0837}
+  longitude={74.7973}
+  locationName="Srinagar, Jammu & Kashmir"
+/>
           </div>
         </div>
       </section>
