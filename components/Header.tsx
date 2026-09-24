@@ -94,12 +94,21 @@ export default function Header() {
         </nav>
 
         <div className="relative shrink-0 md:hidden">
+          {menuOpen && (
+            <button
+              type="button"
+              aria-label="Close navigation menu"
+              onClick={() => setMenuOpen(false)}
+              className="fixed inset-0 z-30 h-full w-full cursor-default"
+            />
+          )}
+
           <button
             type="button"
             onClick={() => setMenuOpen((open) => !open)}
             aria-expanded={menuOpen}
             aria-label="Toggle navigation menu"
-            className="flex items-center gap-2 rounded-lg border border-storm-700 bg-storm-900/70 px-3 py-2 text-sm font-semibold text-slate-200 transition hover:border-amber-500/50 hover:text-amber-400"
+            className="relative z-50 flex items-center gap-2 rounded-lg border border-storm-700 bg-storm-900/70 px-3 py-2 text-sm font-semibold text-slate-200 transition hover:border-amber-500/50 hover:text-amber-400"
           >
             <span>Menu</span>
 
