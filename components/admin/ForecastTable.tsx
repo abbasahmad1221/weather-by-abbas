@@ -1,4 +1,4 @@
-"use client";
+ "use client";
 
 import { useState } from "react";
 import Link from "next/link";
@@ -14,6 +14,7 @@ type Row = {
   category: string | null;
   publishedAt: string | null;
   isSample: boolean;
+  isMarquee: boolean;
 };
 
 export default function ForecastTable({ forecasts }: { forecasts: Row[] }) {
@@ -26,6 +27,17 @@ export default function ForecastTable({ forecasts }: { forecasts: Row[] }) {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ published: !row.published }),
+    });
+    setBusyId(null);
+    router.refresh();
+  }
+
+  async function toggleMarquee(row: Row) {
+    setBusyId(row.id);
+    await fetch(`/api/forecasts/${row.id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ isMarquee: !row.isMarquee }),
     });
     setBusyId(null);
     router.refresh();
@@ -67,6 +79,11 @@ export default function ForecastTable({ forecasts }: { forecasts: Row[] }) {
                 <div className="flex items-center gap-2 text-xs text-slate-400">
                   <SeverityBadge severity={row.severity} />
                   {row.isSample && <span className="rounded bg-slate-200 px-1.5 py-0.5">Sample</span>}
+                  {row.isMarquee && (
+                    <span className="rounded bg-amber-100 px-1.5 py-0.5 text-amber-700">
+                      Marquee
+                    </span>
+                  )}
                 </div>
               </td>
               <td className="px-4 py-3">
@@ -90,6 +107,17 @@ export default function ForecastTable({ forecasts }: { forecasts: Row[] }) {
                   >
                     Edit
                   </Link>
+                  <button
+                    disabled={busyId === row.id || !row.published}
+                    onClick={() => toggleMarquee(row)}
+                    className={`rounded-md border px-2.5 py-1 text-xs disabled:opacity-50 ${
+                      row.isMarquee
+                        ? "border-amber-400 bg-amber-50 text-amber-700 hover:bg-amber-100"
+                        : "border-sky-300 text-sky-700 hover:bg-sky-50"
+                    }`}
+                  >
+                    {row.isMarquee ? "Remove Marquee" : "Set Marquee"}
+                  </button>
                   <button
                     disabled={busyId === row.id}
                     onClick={() => togglePublish(row)}
