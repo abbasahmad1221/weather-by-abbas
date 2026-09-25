@@ -1,0 +1,1 @@
+ALTER TABLE "Forecast" ADD COLUMN "isMarquee" BOOLEAN NOT NULL DEFAULT false;
