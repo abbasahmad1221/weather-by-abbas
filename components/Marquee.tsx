@@ -1,4 +1,4 @@
-import Link from "next/link";
+ import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 
 export default async function Marquee() {
@@ -19,6 +19,8 @@ export default async function Marquee() {
     <div className="overflow-hidden border-b border-amber-300 bg-amber-50">
       <Link
         href={`/forecast/${forecast.slug}`}
+        target="_blank"
+        rel="noopener noreferrer"
         className="block overflow-hidden py-2 text-sm font-semibold text-amber-900"
       >
         <div className="flex w-max animate-marquee whitespace-nowrap">
