@@ -44,6 +44,7 @@ model Forecast {
   metaDescription String?
   published      Boolean   @default(false)
   isSample       Boolean   @default(false)
+  isMarquee       Boolean   @default(false)
   publishedAt    DateTime?
   validFrom      DateTime?
   validUntil     DateTime?
