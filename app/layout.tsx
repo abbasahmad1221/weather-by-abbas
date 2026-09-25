@@ -1,55 +1,46 @@
-import type { Metadata } from "next";
-import "./globals.css";
-import { siteConfig } from "@/lib/site";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+ import Link from "next/link";
+import { prisma } from "@/lib/prisma";
 
-export const metadata: Metadata = {
-  verification: {
-  google: "ONqc1c52Urv7F4vRxCP0WjvQOT0RRwjkptvz0WCCpCQ",
-},
-  metadataBase: new URL(siteConfig.url),
-  title: {
-    default: `${siteConfig.name} | Jammu & Kashmir Weather Forecast`,
-    template: `%s | ${siteConfig.name}`,
-  },
-  description: siteConfig.description,
-  keywords: siteConfig.keywords,
-  authors: [{ name: "Abbas Nabi" }],
-  creator: "Abbas Nabi",
-  openGraph: {
-    type: "website",
-    locale: "en_IN",
-    url: siteConfig.url,
-    title: siteConfig.name,
-    description: siteConfig.description,
-    siteName: siteConfig.name,
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: siteConfig.name,
-    description: siteConfig.description,
-    creator: siteConfig.twitter,
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: { index: true, follow: true },
-  },
-  icons: {
-    icon: "/logo.jpg",
-    apple: "/logo.jpg",
-  },
-};
+export default async function Marquee() {
+  const forecast = await prisma.forecast.findFirst({
+    where: {
+      published: true,
+      isMarquee: true,
+    },
+    select: {
+      title: true,
+      slug: true,
+    },
+  });
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+  if (!forecast) return null;
+
   return (
-    <html lang="en">
-      <body className="flex min-h-screen flex-col">
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
-      </body>
-    </html>
+    <div className="overflow-hidden border-b border-amber-300 bg-amber-50">
+      <Link
+        href={`/forecast/${forecast.slug}`}
+        className="block overflow-hidden py-2 text-sm font-semibold text-amber-900"
+      >
+        <div className="flex w-max animate-marquee whitespace-nowrap">
+          <span className="mx-8">⚠️ {forecast.title}</span>
+          <span className="mx-8">⚠️ {forecast.title}</span>
+          <span className="mx-8">⚠️ {forecast.title}</span>
+          <span className="mx-8">⚠️ {forecast.title}</span>
+        </div>
+      </Link>
+      <style>{`
+        @keyframes marquee {
+          from {
+            transform: translateX(0);
+          }
+          to {
+            transform: translateX(-50%);
+          }
+        }
+        .animate-marquee {
+          animation: marquee 28s linear infinite;
+        }
+      `}</style>
+    </div>
   );
 }
