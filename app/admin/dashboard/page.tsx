@@ -1,6 +1,8 @@
-import { prisma } from "@/lib/prisma";
+ import { prisma } from "@/lib/prisma";
 import ForecastTable from "@/components/admin/ForecastTable";
+
 export const dynamic = "force-dynamic";
+
 export default async function AdminDashboard() {
   const forecasts = await prisma.forecast.findMany({
     orderBy: { createdAt: "desc" },
@@ -36,6 +38,7 @@ export default async function AdminDashboard() {
             category: f.category?.name || null,
             publishedAt: f.publishedAt?.toISOString() || null,
             isSample: f.isSample,
+            isMarquee: f.isMarquee,
           }))}
         />
       </div>
